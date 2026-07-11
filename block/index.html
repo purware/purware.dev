@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocked</title>
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 2rem 1.5rem;
+            background: #000;
+            color: #e3dac9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 1rem;
+        }
+        p {
+            font-size: 1.25rem;
+            line-height: 1.55;
+            margin: 0;
+            max-width: 30rem;
+        }
+        .host { font-weight: 700; }
+    </style>
+</head>
+<body>
+    <h1>Blocked</h1>
+    <p id="detail">This site is blocked by AntApp.</p>
+
+    <script>
+        // The AntApp accessibility service redirects blocked-website visits here,
+        // carrying the blocked host and the block's name in the URL fragment
+        // (e.g. #host=tiktok.com&name=No+social). The fragment is never sent to
+        // the server, so the blocked host stays on the device. We read it
+        // client-side and render it as inert text.
+        (function () {
+            function readFragment() {
+                var out = {};
+                var hash = window.location.hash.replace(/^#/, '');
+                if (!hash) return out;
+                hash.split('&').forEach(function (pair) {
+                    if (!pair) return;
+                    var eq = pair.indexOf('=');
+                    if (eq === -1) return;
+                    var key = pair.slice(0, eq);
+                    var raw = pair.slice(eq + 1);
+                    try {
+                        // Kotlin's URLEncoder form-encodes spaces as '+', which
+                        // decodeURIComponent leaves untouched — swap it first.
+                        out[key] = decodeURIComponent(raw.replace(/\+/g, ' '));
+                    } catch (e) {
+                        out[key] = raw.replace(/\+/g, ' ');
+                    }
+                });
+                return out;
+            }
+
+            var params = readFragment();
+            var host = (params.host || '').trim();
+            var name = (params.name || '').trim();
+            var detail = document.getElementById('detail');
+
+            if (host && name) {
+                // Assemble via text nodes so host/name can never inject markup.
+                detail.textContent = '';
+                var strong = document.createElement('span');
+                strong.className = 'host';
+                strong.textContent = host;
+                detail.appendChild(strong);
+                detail.appendChild(document.createTextNode(' is blocked by your “' + name + '” rule.'));
+            } else if (host) {
+                detail.textContent = host + ' is blocked by AntApp.';
+            }
+            // else: leave the generic default already in the markup.
+        })();
+    </script>
+</body>
+</html>
