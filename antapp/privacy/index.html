@@ -29,77 +29,146 @@
             margin: 2rem 0 0.6rem;
             font-weight: 700;
         }
+        h3 {
+            font-size: 1.1rem;
+            margin: 1.4rem 0 0.5rem;
+            font-weight: 700;
+        }
         p, li { margin: 0 0 0.8rem; }
         ul { padding-left: 1.3rem; margin: 0 0 0.8rem; }
         li { margin-bottom: 0.3rem; }
         a { color: #e3dac9; text-decoration: underline; text-underline-offset: 2px; }
+        code { font-size: 0.95em; word-break: break-word; }
         .updated { opacity: 0.7; margin-bottom: 2rem; }
+        .lead strong { font-weight: 700; }
+        .table-wrap { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 0 0.8rem;
+            font-size: 1.05rem;
+        }
+        th, td {
+            text-align: left;
+            vertical-align: top;
+            padding: 0.5rem 0.7rem;
+            border-bottom: 1px solid rgba(227, 218, 201, 0.25);
+        }
+        th { font-weight: 700; }
     </style>
 </head>
 <body>
     <main>
         <h1>AntApp Privacy Policy</h1>
-        <p class="updated">Last updated: 13 May 2026</p>
+        <p class="updated">Last updated: 11 July 2026</p>
 
-        <p>AntApp ("we", "the app") is a productivity app that runs entirely on your device. This policy explains what data the app handles and how.</p>
+        <p>AntApp is a "commitment device" for Android that helps you block or time-limit distracting apps and websites according to rules you set for yourself. This policy explains, in plain language, what data AntApp does and does not handle, where it goes, and why.</p>
 
-        <h2>TL;DR</h2>
+        <p class="lead">The short version: <strong>almost everything AntApp knows about your apps, your block rules, your schedules, and your usage stays on your device and is never transmitted anywhere.</strong> The only data that leaves your device is what is needed to run subscriptions (through Google Play and RevenueCat) and any support message you choose to send us.</p>
+
+        <h2>1. What data stays on your device (and never leaves it)</h2>
+        <p>All of your configuration and usage data is stored <strong>locally</strong> on your device in an on-device SQLite database and in Android's app preferences storage. This includes:</p>
         <ul>
-            <li>AntApp does not collect, transmit, or sell your personal information.</li>
-            <li>The app runs entirely on your device. We do not operate any backend server.</li>
-            <li>The only data that leaves your device is purchase information you submit to Google Play (on Android) or the App Store (on iOS) when you buy a paid tier of AntApp.</li>
+            <li>The list of apps you have chosen to block or time-limit.</li>
+            <li>Your block rules, schedules, daily allowances, and changes-delay settings.</li>
+            <li>Your strict-mode settings.</li>
+            <li>Usage ledgers (how much time has been counted toward a time-limit allowance).</li>
         </ul>
+        <p><strong>This data is not uploaded, synced, shared, or sold.</strong> It never leaves your device. It exists only to make the app work on your phone. When you uninstall AntApp, this local data is removed with the app.</p>
 
-        <h2>What data AntApp handles</h2>
-        <p>All data AntApp creates or uses is stored only on your device, in the app's local sandbox. None of it is uploaded to any server we control. This generally includes:</p>
+        <h2>2. Accessibility Service — what it reads and why</h2>
+        <p>AntApp uses Android's <strong>Accessibility Service</strong> to enforce the blocks you configure. To do that, it reads:</p>
         <ul>
-            <li>Settings and configuration you enter into the app.</li>
-            <li>On-device state the app needs to function.</li>
-            <li>Premium entitlement state — whether you have an active paid subscription or lifetime purchase, and (where the platform reports it) when it expires.</li>
+            <li><strong>Which app is currently in the foreground</strong>, so it can tell whether an app you asked to block is open and show the block banner.</li>
+            <li><strong>The address (URL) bar of supported web browsers</strong> (Chrome, Firefox, Brave, and Edge), so that if you have chosen to block a specific website, AntApp can detect that address and redirect you away from it.</li>
         </ul>
-        <p>AntApp does not collect:</p>
+        <p>Important facts about this:</p>
         <ul>
-            <li>Your name, email address, phone number, contacts, photos, location, calendar, messages, or files.</li>
-            <li>Crash reports or analytics.</li>
-            <li>Any device identifier we control.</li>
+            <li>This information is used <strong>only on your device, in real time, to enforce the rules you set for yourself.</strong></li>
+            <li>It is <strong>never transmitted off the device, never stored on a server, never logged remotely, and never sold or used for advertising.</strong></li>
+            <li>AntApp does not build a browsing-history profile. It looks at the current foreground app and current browser address only to decide whether to apply one of your blocks, and then it moves on.</li>
         </ul>
+        <p>We use the Accessibility Service strictly for this blocking functionality, in line with Google Play's Accessibility API requirements.</p>
 
-        <h2>Permissions</h2>
-        <p>AntApp requests only the operating-system permissions needed for its core functionality. Any data accessed via these permissions is processed entirely on-device and is never transmitted to us. See the app's store listing for the specific permissions it requests and why.</p>
-
-        <h2>Purchases</h2>
-        <p>Where AntApp offers an in-app purchase, payment is handled by Google Play Billing on Android or the App Store on iOS. When you make a purchase:</p>
+        <h2>3. Subscriptions (Google Play + RevenueCat)</h2>
+        <p>AntApp offers an optional premium subscription (the <code>premium</code> entitlement), available as a monthly or yearly plan with a 7-day free trial. Prices are shown in your local currency on the in-app paywall and at Google Play checkout.</p>
         <ul>
-            <li>Google Play (or Apple) handles the payment. AntApp never sees your payment-card details.</li>
-            <li>The app receives a signed receipt from Google or Apple confirming the purchase, which is stored locally on your device to remember your entitlement.</li>
-            <li>Purchase data is governed by <a href="https://policies.google.com/privacy">Google's privacy policy</a> and, on iOS, <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
+            <li><strong>Payments are processed by Google Play Billing.</strong> We never see or store your payment-card details.</li>
+            <li>We use <strong>RevenueCat</strong>, a third-party subscription-management provider, to manage and verify entitlements. RevenueCat acts as a data processor on our behalf.</li>
         </ul>
-
-        <h2>Contacting us</h2>
-        <p>When you email us (e.g. at <a href="mailto:antapp@purware.dev">antapp@purware.dev</a>), we receive whatever you include in your message — typically your email address, plus any details, attachments, or device info you choose to share. We keep this correspondence in our email inbox so we can reply and refer back to it later. We don't import it into the app or share it with third parties beyond our email provider.</p>
-
-        <h2>Data sharing</h2>
-        <p>We do not share your data with third parties. The only outbound data flow is the purchase request you initiate to Google Play or the App Store.</p>
-
-        <h2>Data retention and deletion</h2>
-        <p>Because AntApp stores all data locally:</p>
+        <p>RevenueCat processes the following categories of data to keep your subscription working:</p>
         <ul>
-            <li>Uninstalling the app removes all AntApp data from your device.</li>
-            <li>You can also clear data via your operating system's app settings.</li>
-            <li>There is no server-side data for us to delete because we do not operate a server.</li>
+            <li><strong>Subscription status</strong> (trial / active / inactive) and <strong>expiry date</strong>.</li>
+            <li><strong>Purchase-history metadata</strong> related to your AntApp subscription.</li>
+            <li><strong>Standard SDK telemetry</strong> needed to operate the subscription service, such as app version and device model / OS version, and a subscription identifier.</li>
         </ul>
+        <p>This data is used to determine whether your subscription is active and to provide the subscription service. It is <strong>not</strong> used for advertising and is <strong>not</strong> sold.</p>
+        <p>RevenueCat handles this data under its own privacy policy: <a href="https://www.revenuecat.com/privacy/">https://www.revenuecat.com/privacy/</a>. Google Play's handling of your purchase is governed by Google's privacy policy: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.</p>
 
-        <h2>Security</h2>
-        <p>Your AntApp data is stored in the app's per-app sandbox, which the operating system isolates from other apps. We do not transmit your data over the network.</p>
+        <h2>4. Support form (optional, user-initiated)</h2>
+        <p>AntApp includes an optional in-app support form where you can send us a bug report, feature request, or other message.</p>
+        <ul>
+            <li>When you submit the form, the <strong>message text and the topic you selected</strong> are sent to us over an encrypted (HTTPS) connection through a relay we operate at <code>https://relay.purware.dev/support</code>. If the relay is unavailable, the app falls back to opening your email app to send the message to <code>antapp@purware.dev</code>.</li>
+            <li>For the <strong>"emergency unlock" topic only</strong>, a device token is included so we can help with that specific request. No other personal information is attached.</li>
+            <li>We do not attach your name, email (unless you type it into the message yourself), location, contacts, or any usage data.</li>
+        </ul>
+        <p>This is entirely optional and only happens when you choose to send a message. Messages you send are received by the developer (purware.dev).</p>
 
-        <h2>Children's privacy</h2>
-        <p>AntApp is not directed at children under 13. We do not knowingly collect data from children.</p>
+        <h2>5. In-app review</h2>
+        <p>AntApp may invite you to rate the app using the <strong>native Google Play in-app review</strong> feature. This is handled entirely by Google Play. AntApp does not receive, see, or store your review or rating; that flow is between you and Google Play.</p>
 
-        <h2>Changes to this policy</h2>
-        <p>If we make material changes to this policy, we will update the "Last updated" date at the top and (where reasonable) surface the change in the app.</p>
+        <h2>6. Permissions and why AntApp requests them</h2>
+        <p>AntApp requests several Android permissions. Each is used only for the purpose described below.</p>
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Permission</th><th>Why AntApp uses it</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Accessibility Service</strong></td><td>Detects the foreground app and reads the browser address bar to enforce the app/website blocks you configure (see Section 2). Used on-device only.</td></tr>
+                <tr><td><strong>Usage access (PACKAGE_USAGE_STATS)</strong></td><td>Reads per-app foreground time to reconcile usage against your time-limit allowances. Stays on device.</td></tr>
+                <tr><td><strong>Display over other apps (SYSTEM_ALERT_WINDOW)</strong></td><td>Draws the block banner overlay on top of a blocked app.</td></tr>
+                <tr><td><strong>Foreground service (FOREGROUND_SERVICE, FOREGROUND_SERVICE_SPECIAL_USE)</strong></td><td>Keeps the accessibility/blocking service alive and runs the tamper-watchdog that supports strict mode.</td></tr>
+                <tr><td><strong>Notifications (POST_NOTIFICATIONS)</strong></td><td>Shows allowance countdowns and reminders.</td></tr>
+                <tr><td><strong>Device Admin</strong></td><td>Provides uninstall protection during an active block (force-lock policy only). AntApp <strong>never</strong> uses this to lock your screen.</td></tr>
+                <tr><td><strong>Receive boot completed (RECEIVE_BOOT_COMPLETED)</strong></td><td>Restores your blocks after the device restarts.</td></tr>
+                <tr><td><strong>Ignore battery optimizations (REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)</strong></td><td>Deep-links you to the battery-optimization prompt so blocking is not killed in the background.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p>None of these permissions are used to collect data for advertising, profiling, or sale.</p>
 
-        <h2>Contact</h2>
-        <p>Questions about this policy? Email <a href="mailto:antapp@purware.dev">antapp@purware.dev</a>.</p>
+        <h2>7. Analytics and tracking</h2>
+        <p>AntApp contains <strong>no analytics, no crash reporting, and no third-party tracking SDKs.</strong> There is no Firebase, Crashlytics, Sentry, Mixpanel, Amplitude, or any custom analytics endpoint. We do not track your behavior across apps or the web.</p>
+
+        <h2>8. Who we share data with</h2>
+        <p>We share data only with the service providers strictly needed to run the features above:</p>
+        <ul>
+            <li><strong>Google Play Billing</strong> — to process your subscription payment.</li>
+            <li><strong>RevenueCat</strong> — to manage and verify your subscription (see Section 3).</li>
+            <li><strong>Our support relay (Cloudflare Worker at <code>relay.purware.dev</code>)</strong> — only when you send a support message (see Section 4).</li>
+        </ul>
+        <p><strong>We never sell your data, and we never use your data for advertising.</strong></p>
+
+        <h2>9. Children</h2>
+        <p>AntApp is a self-control and productivity tool intended for <strong>adults</strong>. It is <strong>not directed at children</strong> and we do not knowingly collect data from children.</p>
+
+        <h2 id="data-deletion">10. Data retention and deletion</h2>
+        <ul>
+            <li><strong>Local data on your device</strong> (apps, block rules, schedules, usage ledgers) persists until you delete it in the app or <strong>uninstall AntApp</strong>, which permanently removes it. This data is never sent to us, so there is nothing on our servers to delete.</li>
+            <li><strong>Subscription and purchase records</strong> are held by our payment processors, Google Play and RevenueCat, to keep your subscription working. You can cancel or manage your subscription at any time through Google Play, and RevenueCat retains this data under its own retention policy.</li>
+            <li><strong>Support messages</strong> you send are received by the developer (purware.dev).</li>
+        </ul>
+        <h3>Requesting deletion of your data</h3>
+        <p>To request deletion of the limited data that leaves your device — your purchase/subscription records held by RevenueCat, and any support messages you have sent us — email <strong>antapp@purware.dev</strong> with the subject line <strong>"Delete my data"</strong>. We will delete the associated records and confirm once it's done, typically within 30 days. Deleting your purchase records may end any active premium entitlement, and uninstalling the app removes all remaining data stored on your device.</p>
+
+        <h2>11. Contact</h2>
+        <p>If you have questions about this policy or your data, contact us:</p>
+        <ul>
+            <li><strong>Developer:</strong> purware.dev</li>
+            <li><strong>Email:</strong> <a href="mailto:antapp@purware.dev">antapp@purware.dev</a></li>
+        </ul>
+        <p>We may update this policy from time to time. When we do, we will change the "Last updated" date at the top of this page.</p>
     </main>
 </body>
 </html>
